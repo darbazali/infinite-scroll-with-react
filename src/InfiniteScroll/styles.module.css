@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  color: white;
+  width: 100%;
+}
+
+.item {
+  padding: 16px;
+  background-color: #e8e8e8;
+  color: black;
+  border-radius: 5px;
+  margin: 8px;
+  min-width: 300px;
+  height: 250px;
+  font-size: 22px;
+  font-weight: 600;
+}

@@ -1,4 +1,4 @@
-export const fetchMoreItems = async (page: number) => {
+export const fetchItemsFromAPI = async (page: number) => {
   return new Promise<string[]>((resolve) => {
     setTimeout(() => {
       resolve(

@@ -3,6 +3,13 @@ import { fetchItemsFromAPI } from "./api"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./styles.module.css"
 
+const handleWindowReload = () => {
+  sessionStorage.removeItem("items")
+  sessionStorage.removeItem("page")
+  sessionStorage.removeItem("scrollPosition")
+  window.location.reload()
+}
+
 const InfiniteScroll: React.FC = () => {
   const navigate = useNavigate()
 
@@ -52,7 +59,6 @@ const InfiniteScroll: React.FC = () => {
     if (loader.current) {
       observer.observe(loader.current)
     }
-
     return () => {
       if (loader.current) {
         observer.unobserve(loader.current)
@@ -63,7 +69,11 @@ const InfiniteScroll: React.FC = () => {
   useEffect(() => {
     // Restore scroll position after rendering
     window.scrollTo(0, savedScrollPosition)
-  }, [])
+    window.addEventListener("beforeunload", handleWindowReload)
+    return () => {
+      window.removeEventListener("beforeunload", handleWindowReload)
+    }
+  }, [savedScrollPosition])
 
   const handleItemClick = (item: string) => {
     // Save the current state before navigating
